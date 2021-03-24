@@ -461,7 +461,7 @@
 (define-simple-macro (define-ffi-functions lib:expr (name:id (ctype:expr ...)) ...)
   (begin (define-ffi-definer lib-definer lib) (lib-definer name (_fun ctype ...)) ...))
 
-(define-ffi-functions (ffi-lib "glfw3")
+(define-ffi-functions (ffi-lib "glfw")
 
   ;initialization, version and error
   (glfwInit                           (-> _int))
@@ -589,4 +589,8 @@
   ;context
   (glfwSwapInterval                   ((interval : _int) -> _void))
   (glfwExtensionSupported             ((extension : _string/utf-8) -> _int))
-  (glfwGetProcAddress                 ((procname : _string/utf-8) -> GLFWglproc)))
+  (glfwGetProcAddress                 ((procname : _string/utf-8) -> GLFWglproc))
+
+  ;wayland
+  (glfwGetWaylandWindow               ((window : _pointer) -> _pointer))
+  (glfwGetWaylandDisplay              (-> _pointer)))
